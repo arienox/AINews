@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import {
   Box,
   TextField,
@@ -36,7 +36,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, error }) => {
     return true;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateForm()) return;
 
@@ -46,6 +46,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, error }) => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleInputChange = (setter: (value: string) => void) => (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    setter(e.target.value);
   };
 
   return (
@@ -66,7 +72,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, error }) => {
           fullWidth
           margin="normal"
           value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
+          onChange={handleInputChange(setFullName)}
           required
           autoFocus
           autoComplete="name"
@@ -78,7 +84,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, error }) => {
           fullWidth
           margin="normal"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleInputChange(setEmail)}
           required
           autoComplete="email"
         />
@@ -89,7 +95,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, error }) => {
           fullWidth
           margin="normal"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handleInputChange(setPassword)}
           required
           autoComplete="new-password"
         />
@@ -100,7 +106,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, error }) => {
           fullWidth
           margin="normal"
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={handleInputChange(setConfirmPassword)}
           required
           autoComplete="new-password"
         />
