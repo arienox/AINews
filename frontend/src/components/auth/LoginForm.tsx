@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import {
   Box,
   TextField,
@@ -20,7 +20,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error }) => {
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
@@ -49,7 +49,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error }) => {
           fullWidth
           margin="normal"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
           required
           autoFocus
           autoComplete="email"
@@ -61,7 +61,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error }) => {
           fullWidth
           margin="normal"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           required
           autoComplete="current-password"
         />

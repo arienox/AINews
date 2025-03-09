@@ -23,7 +23,9 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.2.1",
     "vite": "^5.1.3"
   }
-} 
+}
